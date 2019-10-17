@@ -12,8 +12,8 @@ import java.awt.event.WindowEvent;
 import java.util.Date;
 
 /**
- * ·É»úÓÎÏ·µÄÖ÷´°¿Ú
- * @author ¸ßä¿
+ * é£æœºæ¸¸æˆçš„ä¸»çª—å£
+ * @author é«˜æ·‡  come on baby
  *
  */
 public class MyGameFrame  extends  Frame {
@@ -27,20 +27,20 @@ public class MyGameFrame  extends  Frame {
 	Explode   bao ;
 	Date  startTime = new Date();
 	Date  endTime;
-	int period;   //ÓÎÏ·³ÖĞøµÄÊ±¼ä
+	int period;   //æ¸¸æˆæŒç»­çš„æ—¶é—´
 	
 	@Override
-	public void paint(Graphics g) {		//×Ô¶¯±»µ÷ÓÃ¡£  gÏàµ±ÓÚÒ»Ö»»­±Ê
+	public void paint(Graphics g) {		//è‡ªåŠ¨è¢«è°ƒç”¨ã€‚  gç›¸å½“äºä¸€åªç”»ç¬”
 		Color   c =  g.getColor();
 		g.drawImage(bg, 0, 0, null);
 		
-		plane.drawSelf(g);  //»­·É»ú
+		plane.drawSelf(g);  //ç”»é£æœº
 		
-		//»­³öËùÓĞµÄÅÚµ¯
+		//ç”»å‡ºæ‰€æœ‰çš„ç‚®å¼¹
 		for(int i=0;i<shells.length;i++){
 			shells[i].draw(g);
 			
-			//·É»úºÍÅÚµ¯µÄÅö×²¼ì²â£¡£¡£¡
+			//é£æœºå’Œç‚®å¼¹çš„ç¢°æ’æ£€æµ‹ï¼ï¼ï¼
 			boolean  peng = shells[i].getRect().intersects(plane.getRect());
 			if(peng){
 				plane.live = false;
@@ -53,12 +53,12 @@ public class MyGameFrame  extends  Frame {
 				bao.draw(g);
 			}
 			
-			//¼ÆÊ±¹¦ÄÜ£¬¸ø³öÌáÊ¾
+			//è®¡æ—¶åŠŸèƒ½ï¼Œç»™å‡ºæç¤º
 			if(!plane.live){
 				g.setColor(Color.red);
-				Font   f  =  new Font("ËÎÌå", Font.BOLD, 50);
+				Font   f  =  new Font("å®‹ä½“", Font.BOLD, 50);
 				g.setFont(f);
-				g.drawString("Ê±¼ä£º"+period+"Ãë", (int)plane.x, (int)plane.y);
+				g.drawString("æ—¶é—´ï¼š"+period+"ç§’", (int)plane.x, (int)plane.y);
 			}
 			
 		}
@@ -67,12 +67,12 @@ public class MyGameFrame  extends  Frame {
 	}
 	
 	
-	//°ïÖúÎÒÃÇ·´¸´µÄÖØ»­´°¿Ú£¡
+	//å¸®åŠ©æˆ‘ä»¬åå¤çš„é‡ç”»çª—å£ï¼
 	class  PaintThread  extends  Thread  {
 		@Override
 		public void run() {
 			while(true){
-				repaint();		//ÖØ»­
+				repaint();		//é‡ç”»
 				
 				try {
 					Thread.sleep(40);   	//1s=1000ms
@@ -84,7 +84,7 @@ public class MyGameFrame  extends  Frame {
 		
 	}
 	
-	//¶¨Òå¼üÅÌ¼àÌıµÄÄÚ²¿Àà
+	//å®šä¹‰é”®ç›˜ç›‘å¬çš„å†…éƒ¨ç±»
 	class   KeyMonitor extends  KeyAdapter  {
 
 		@Override
@@ -102,10 +102,10 @@ public class MyGameFrame  extends  Frame {
 	
 	
 	/**
-	 * ³õÊ¼»¯´°¿Ú
+	 * åˆå§‹åŒ–çª—å£
 	 */
 	public  void  launchFrame(){
-		this.setTitle("ÉĞÑ§ÌÃÑ§Ô±_³ÌĞòÔ³×÷Æ·");
+		this.setTitle("å°šå­¦å ‚å­¦å‘˜_ç¨‹åºçŒ¿ä½œå“");
 		this.setVisible(true);
 		this.setSize(Constant.GAME_WIDTH	, Constant.GAME_HEIGHT);
 		this.setLocation(300, 300);
@@ -117,11 +117,11 @@ public class MyGameFrame  extends  Frame {
 			}
 		});
 		
-		new PaintThread().start();	//Æô¶¯ÖØ»­´°¿ÚµÄÏß³Ì
-		addKeyListener(new KeyMonitor());   //¸ø´°¿ÚÔö¼Ó¼üÅÌµÄ¼àÌı
+		new PaintThread().start();	//å¯åŠ¨é‡ç”»çª—å£çš„çº¿ç¨‹
+		addKeyListener(new KeyMonitor());   //ç»™çª—å£å¢åŠ é”®ç›˜çš„ç›‘å¬
 		
 		
-		//³õÊ¼»¯50¸öÅÚµ¯
+		//åˆå§‹åŒ–50ä¸ªç‚®å¼¹
 		for(int i=0;i<shells.length;i++){
 			shells[i] = new Shell();
 		}
@@ -137,7 +137,7 @@ public class MyGameFrame  extends  Frame {
 	 
 	public void update(Graphics g) {
 	    if(offScreenImage == null)
-	        offScreenImage = this.createImage(Constant.GAME_WIDTH,Constant.GAME_HEIGHT);//ÕâÊÇÓÎÏ·´°¿ÚµÄ¿í¶ÈºÍ¸ß¶È
+	        offScreenImage = this.createImage(Constant.GAME_WIDTH,Constant.GAME_HEIGHT);//è¿™æ˜¯æ¸¸æˆçª—å£çš„å®½åº¦å’Œé«˜åº¦
 	     
 	    Graphics gOff = offScreenImage.getGraphics();
 	    paint(gOff);
